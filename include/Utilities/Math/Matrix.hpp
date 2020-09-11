@@ -13,82 +13,81 @@ namespace Orion
     {
         namespace Math
         {
-            template<typename T, uint32_t N, uint32_t M>
-            class Matrix
+            template<typename T>
+            struct Matrix
             {
-                private:
-                    T _mat[N * M];
+                T** _matrix;
+                uint16_t _rows;
+                uint16_t _columns;
+                bool _initialized = false;
 
-                public:
-                    Matrix() { memset(_mat, 0, M * N * sizeof(T)); }
-
-                    Matrix(T* arr, uint32_t len) { memset(_mat, 0, M * N * sizeof(T)); memcpy(_mat, arr, (len < N * M) ? len : N * M); }
-
-                    T cell(uint32_t i, uint32_t j) const { return _mat[ i * N + j]; }
-                    T& cell(uint32_t i, uint32_t j) { return _mat[i * N + j]; }
-
-                    Vector<T, N> rowToVector(uint32_t i) const
+                bool Initialize(uint16_t rows, uint16_t columns)
+                {
+                    if (_initialized) this->Free();
+                    _matrix = (T**)malloc(rows * sizeof(T*));
+                    if (!_matrix) return false;
+                    uint16_t i;
+                    for (i = 0; i < rows; i++)
                     {
-                        Vector<T, N> ret;
-                        for (uint32_t j = 0; j < N; j++)
-                            ret[i] = cell(i, j);
-                        return ret;
-                    }
-
-                    Vector<T, N> colToVector(uint32_t j) const
-                    {
-                        Vector<T, M> ret;
-                        for (uint32_t i = 0; i < M; i++)
-                            ret[i] = cell(i, j);
-                        return ret;
-                    }
-                    
-                    Matrix& operator=(const Matrix& m)
-                    {
-                        for (uint32_t i = 0; i < N * M; i++)
-                            _mat[i] = m._mat[i];
-                        return *this;
-                    }
-
-                    T& operator()(uint32_t i, uint32_t j) { return cell(i, j); }
-
-                    T operator()(uint32_t i, uint32_t j) const { return cell(i, j); }
-
-                    Matrix operator+(const Matrix& m) const
-                    {
-                        Matrix ret;
-                        for (uint32_t i = 0; i < N * M; i++)
-                            ret._mat[i] = _mat[i] + m._mat[i];
-                        return ret;
-                    }
-                
-                    Matrix operator-(const Matrix& m) const
-                    {
-                        Matrix ret;
-                        for (uint32_t i = 0; i < N * M; i++)
-                            ret._mat[i] = _mat[i] - m._mat[i];
-                        return ret;
-                    }
-
-                    Matrix operator*(T val)
-                    {
-                        Matrix ret;
-                        for (uint32_t i = 0; i < N * M; i++)
-                            ret._mat[i] = _mat[i] * val;
-                        return ret;
-                    }
-
-                    Matrix operator*(const Matrix& m) const
-                    {
-                        Matrix ret;
-                        for (uint32_t i = 0; i < N; i++)
+                        _matrix[i] = (T*)malloc(columns * sizeof(T*));
+                        if (!_matrix[i])
                         {
-                            Vector<T, N> row = rowToVector(i);
-                            for (uint32_t j = 0; j < M; i++)
-                                ret(i, j) = row *  colToVector(j);
+                            for (uint16_t j = 0; j < i; j++)
+                                free(_matrix[j]);
+                            free(_matrix);
+                            return false;
                         }
-                        return ret;
                     }
+                    _rows = rows;
+                    _columns = columns;
+                    _initialized = true;
+                    return true;
+                }
+
+                void Free()
+                {
+                    if (_initialized) return;
+                    for (uint16_t i = 0; i < _rows; i++)
+                        free(_matrix[i]);
+                    free(_matrix);
+                    _initialized = false;
+                }
+
+                static bool Multiply(Matrix<T>& result, Matrix<T>& m1, Matrix<T>& m2)
+                {
+                    if (m1._columns != m2._rows) return false;
+                    if ((!result._initialized) || result._rows != m1._rows || result._columns != m2._columns)
+                    {
+                        if (!result.Initialize(m1._rows, m2._columns)) return false;
+                    }
+                    for (uint16_t i = 0; i < m1._rows; i++)
+                    {
+                        for (uint16_t j = 0; j < m2._columns; j++)
+                        {
+                            result._matrix[i][j] = 0;
+                            for (uint16_t k = 0; k < m1._columns; k++)
+                                result._matrix[i][j] += m1._matrix[i][k] * m2._matrix[k][j];
+                        }
+                    }
+                    return true;
+                }
+                static bool Multiply(Vector<T>& result, Matrix<T>& m, Vector<T>& v)
+                {
+                    if ((!m._initialized) || (!v._initialized) || (m._columns != v._size)) return false;
+                    if ((!result._initialized) || result._size != v._size)
+                    {
+                        if (!result.Initialize(v._size)) return false;
+                    }
+                    for (uint16_t i = 0; i < m._rows; i++)
+                    {
+                        result._vector[i] = 0;
+                        for (uint16_t j = 0; j < m._columns; j++)
+                        {
+                            result._vector[i] += m._matrix[i][j] * v._vector[j];
+                        }
+                    }
+                    return true;
+                }
             };
         }
     }

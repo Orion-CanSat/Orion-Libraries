@@ -13,71 +13,81 @@ namespace Orion
     {
         namespace Math
         {
-            template<typename T, uint32_t N>
-            class Vector
+            template<typename T>
+            struct Vector
             {
-                private:
-                    T _vec[N];
+                T* _vector;
+                uint16_t _size;
+                bool _initialized = false;
+                bool Initialize(uint16_t size)
+                {
+                    if (_initialized) this->Free();
+                    _vector = (T*)malloc(size * sizeof(T));
+                    if (!_vector) return false;
+                    _size = size;
+                    _initialized = true;
+                    return true;
+                }
 
-                public:
-                    Vector() { memset(_vec, 0, N * sizeof(T)); }
+                void Free()
+                {
+                    if (_initialized) return;
+                    free(_vector);
+                    _initialized = false;
+                }
 
-                    Vector(T* arr, uint32_t len) { memset(_vec, 0, sizeof(T) * N); memcpy(_vec, arr, (len < N) ? len : N); }
-
-                    Vector& operator=(const Vector& v)
+                static bool Add(Vector<T>& result, Vector<T>& v1, Vector<T>& v2)
+                {
+                    if ((!v1._initialized) || (!v2._initialized) || v1._size != v2._size) return false;
+                    if ((!result._initialized) || result._size != v1._size)
                     {
-                        for (uint32_t i = 0; i < N; i++)
-                            _vec[i] = v._vec[i];
-                        return *this;
+                        result.Free();
+                        if (!result.Initialize(v1._size)) return false;
                     }
-
-                    T& operator[](uint32_t pos) { return _vec[pos]; }
-
-                    T operator[](uint32_t pos) const { return _vec[pos]; }
-
-                    T& operator()(uint32_t pos) { return _vec[pos]; }
-
-                    T operator()(uint32_t pos) const { return _vec[pos]; }
-
-                    Vector operator+(const Vector& v) const
+                    for (uint16_t i = 0; i < v1._size; i++)
                     {
-                        Vector ret;
-                        for (uint32_t i = 0; i < N; i++)
-                            ret._vec[i] = _vec[i] + v._vec[i];
-                        return ret;
+                        result._vector[i] = v1._vector[i] + v2._vector[i];
                     }
+                    return true;
+                }
 
-                    Vector operator-(const Vector& v) const
+                static bool Subtract(Vector<T>& result, Vector<T>& v1, Vector<T>& v2)
+                {
+                    if ((!v1._initialized) || (!v2._initialized) || v1._size != v2._size) return false;
+                    if ((!result._initialized) || result._size != v1._size)
                     {
-                        Vector ret;
-                        for (uint32_t i = 0; i < N; i++)
-                            ret._vec[i] = _vec[i] - v._vec[i];
-                        return ret;
+                        result.Free();
+                        if (!result.Initialize(v1._size)) return false;
                     }
+                    for (uint16_t i = 0; i < v1._size; i++)
+                    {
+                        result._vector[i] = v1._vector[i] - v2._vector[i];
+                    }
+                    return true;
+                }
 
-                    Vector operator*(T val)
+                static bool Inverse(Vector<T>& result, Vector<T>& v)
+                {
+                    if (!v._initialized) return false;
+                    if ((!result._initialized) || result._size != v._size)
                     {
-                        Vector ret;
-                        for (uint32_t i = 0; i < N; i++)
-                            ret._vec[i] = _vec[i] * val;
-                        return ret;
+                        result.Free();
+                        if (!result.Initialize(v._size)) return false;
                     }
+                    for (uint16_t i = 0; i < v._size; i++)
+                    {
+                        result._vector[i] = -v._vector[i];
+                    }
+                    return true;
+                }
 
-                    T operator*(const Vector& v)
-                    {
-                        T ret = _vec[0] * v._vec[0];
-                        for (uint32_t i = 1; i < N; i++)
-                            ret += _vec[i] * v._vec[i];
-                        return ret;
-                    }
-
-                    Vector operator/(T val)
-                    {
-                        Vector ret;
-                        for (uint32_t i = 0; i < N; i++)
-                            ret._vec[i] = _vec[i] / val;
-                        return ret;
-                    }
+                static bool Multiply(T& result, Vector<T>& v1, Vector<T>& v2)
+                {
+                    if ((!v1._initialized) || (!v2._initialized) || v1._size != v2._size) return false;
+                    result = v1._vector[0] * v2._vector[0];
+                    for (uint16_t i = 1; i < v1._size; i++) result += v1._vector[i] + v2._vector[i];
+                    return true;
+                }
             };
         }
     }
