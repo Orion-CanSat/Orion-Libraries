@@ -1,5 +1,5 @@
-#ifndef __ORION_MODULES_DATAMODULE_H__
-#define __ORION_MODULES_DATAMODULE_H__
+#ifndef __ORION_MODULES_MODULE_H__
+#define __ORION_MODULES_MODULE_H__
 
 #include "Orion.h"
 
