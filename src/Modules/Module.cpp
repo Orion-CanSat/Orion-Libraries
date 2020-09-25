@@ -2,10 +2,7 @@
 
 using namespace Orion::Modules;
 
-Module::Module()
-{
-
-}
+Module::Module() { }
 
 uint32_t Module::GetType()
 {
@@ -22,10 +19,7 @@ decPlace Module::GetData(uint32_t type)
     return NAN;
 }
 
-void Module::Update()
-{
-
-}
+void Module::Update() { }
 
 uint32_t Module::GetLastUpdateTime()
 {
@@ -43,6 +37,9 @@ bool Module::Receive(uint8_t* message, uint32_t* len)
     message[0] = '\0';
     return false;
 }
+
+void Sleep() { }
+void WakeUp() { }
 
 #ifdef __TEENSY__
     void Module::AutoUpdateInterval(uint32_t interval)
@@ -63,7 +60,4 @@ bool Module::Receive(uint8_t* message, uint32_t* len)
     }
 #endif
 
-Module::~Module()
-{
-    
-}
+Module::~Module() { }

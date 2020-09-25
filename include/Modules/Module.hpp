@@ -41,6 +41,9 @@ namespace Orion
                 virtual bool Transmit(uint8_t* message, uint32_t len);
                 virtual bool Receive(uint8_t* message, uint32_t* len);
 
+                virtual void Sleep();
+                virtual void WakeUp();
+                
                 #ifdef __TEENSY__
                     void AutoUpdateInterval(uint32_t interval);
                 #endif
