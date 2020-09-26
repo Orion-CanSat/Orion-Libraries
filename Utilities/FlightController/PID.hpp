@@ -1,4 +1,10 @@
+#ifndef __ORION_UTILITIES_FLIGHTCONTROLLER_PID_H__
+#define __ORION_UTILITIES_FLIGHTCONTROLLER_PID_H__
+
 #include "Orion.h"
+
+#include <stdint.h>
+#include <math.h>
 
 namespace Orion
 {
@@ -21,3 +27,5 @@ namespace Orion
         }
     }
 }
+
+#endif//__ORION_UTILITIES_FLIGHTCONTROLLER_PID_H__

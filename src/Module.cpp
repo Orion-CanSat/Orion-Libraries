@@ -38,8 +38,8 @@ bool Module::Receive(uint8_t* message, uint32_t* len)
     return false;
 }
 
-void Sleep() { }
-void WakeUp() { }
+void Module::Sleep() { }
+void Module::WakeUp() { }
 
 #ifdef __TEENSY__
     void Module::AutoUpdateInterval(uint32_t interval)
