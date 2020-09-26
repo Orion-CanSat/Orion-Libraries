@@ -5,7 +5,8 @@
             "includePath": [
                 "C:/DEV/Arduino/hardware/teensy/avr/cores/teensy3",
                 "C:/DEV/Arduino/hardware/teensy/avr/cores/teensy4",
-                "include"
+                "C:/Users/richa/OneDrive/Documents/source/Orion-CanSat/CanSat/lib/**",
+                "."
             ],
             "compilerPath": "C:/DEV/Arduino/hardware/tools/arm/bin/arm-none-eabi-gcc.exe",
             "intelliSenseMode": "gcc-x64"
