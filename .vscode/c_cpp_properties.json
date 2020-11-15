@@ -3,13 +3,9 @@
         {
             "name": "Orion Libraries",
             "includePath": [
-                "C:/DEV/Arduino/hardware/teensy/avr/cores/teensy3",
-                "C:/DEV/Arduino/hardware/teensy/avr/cores/teensy4",
-                "C:/Users/richa/OneDrive/Documents/source/Orion-CanSat/CanSat/lib/**",
                 "."
             ],
-            "compilerPath": "C:/DEV/Arduino/hardware/tools/arm/bin/arm-none-eabi-gcc.exe",
-            "intelliSenseMode": "gcc-x64"
+            "intelliSenseMode": "gcc-arm"
         }
     ],
     "version": 4
