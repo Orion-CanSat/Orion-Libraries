@@ -1,14 +1,12 @@
 #include "Utilities/Memory/FileBlob.hpp"
 
-#include <string>
-
 using namespace Orion::Utilities::Memory;
 
 bool Initialized = false;
 
-std::string RandomString(const int len)
+String RandomString(const int len)
 {    
-    std::string s;
+    String s;
     static const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     
     randomSeed(analogRead(0));
@@ -27,19 +25,21 @@ FileBlob::FileBlob(int16_t sdCS, uint16_t size)
     _cs = sdCS;
     _size = size;
 
-    SD.begin(sdCS);
-
-    if (Initialized)
+    if (!SD.begin(sdCS))
+        return;
+    
+    _file = SD.open((String(".FB/") + RandomString(4) + String(".ram")).c_str(), FILE_READ | FILE_WRITE);
+    if (!_file)
         return;
 
-    if (SD.exists(".FileBlob/"))
-        SD.rmdir(".FileBlob/");
-
     Initialized = true;
-    _file = SD.open((std::string(".FileBlob/") + RandomString(12)).c_str(), FILE_READ | FILE_WRITE);
-    
+    delay(10);
+
     for (int i = 0; i < _size; i++)
-        _file.write(zero, 1);
+    {
+        _file.print(0);
+        _file.flush();
+    }
 }
 
 uint8_t& FileBlob::operator[](uint16_t position)
@@ -60,7 +60,9 @@ void FileBlob::Save()
     
     _file.seek(_cachedSkip);
     _file.write(_cached, _cachedSize);
-    
+    _file.flush();
+
+    delay(10);
 }
 bool FileBlob::Cache(uint16_t skip, uint16_t size)
 {

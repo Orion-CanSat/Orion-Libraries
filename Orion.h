@@ -1,9 +1,15 @@
 #ifndef __ORION_H__
 #define __ORION_H__
 
+#include <stdbool.h>
+
 #ifndef NAN
     #define NAN (float)0xFFFFFFFF
     #pragma warning Your platform or compiler does not natively support the use of Not-A-Number or aka NAN.
+#endif
+
+#ifndef NULL
+    #define NULL (void*)0x00
 #endif
 
 #ifndef PI
@@ -11,6 +17,17 @@
 #endif
 
 #define decPlace float
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+void SetPanic(_Bool value);
+void SetPanicCallback(void(*panicFunctionCallback)(void));
+void Panic();
+#ifdef __cplusplus
+}
+#endif
 
 /**
  * Block of code to determine board type
