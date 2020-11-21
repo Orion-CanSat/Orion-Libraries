@@ -5,7 +5,7 @@
 
 #include <stdint.h>
 #include <math.h>
-#include "PathPoint.hpp"
+#include "Orion/Utilities/FlightController/PathPoint.hpp"
 
 namespace Orion
 {

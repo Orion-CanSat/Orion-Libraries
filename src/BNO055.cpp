@@ -1,5 +1,5 @@
-#include "Modules/DataModules/BNO055.hpp"
-#include "Utilities/Timeout.hpp"
+#include "Orion/Modules/DataModules/BNO055.hpp"
+#include "Orion/Utilities/Timeout.hpp"
 
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>

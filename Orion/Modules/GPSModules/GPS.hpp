@@ -2,8 +2,8 @@
 #define __ORION_MODULES_GPSMODULES_GPS_H__
 
 #include "Orion.h"
-#include "Modules/Module.hpp"
-#include "Modules/GPSModules/Coordinates.hpp"
+#include "Orion/Modules/Module.hpp"
+#include "Orion/Modules/GPSModules/Coordinates.hpp"
 
 #include <stdint.h>
 #include <math.h>

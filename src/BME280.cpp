@@ -1,5 +1,5 @@
-#include "Modules/DataModules/BME280.hpp"
-#include "Utilities/Timeout.hpp"
+#include "Orion/Modules/DataModules/BME280.hpp"
+#include "Orion/Utilities/Timeout.hpp"
 
 #include <Adafruit_BME280.h>
 

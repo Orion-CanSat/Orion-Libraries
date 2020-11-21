@@ -1,4 +1,4 @@
-#include "Modules/GPSModules/GPS.hpp"
+#include "Orion/Modules/GPSModules/GPS.hpp"
 
 using namespace Orion::Modules::GPSModules;
 

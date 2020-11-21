@@ -2,9 +2,9 @@
 #define __ORION_MODULES_GPSMODULES_MTK3339_H__
 
 #include "Orion.h"
-#include "Modules/Module.hpp"
-#include "Modules/GPSModules/Coordinates.hpp"
-#include "Modules/GPSModules/GPS.hpp"
+#include "Orion/Modules/Module.hpp"
+#include "Orion/Modules/GPSModules/Coordinates.hpp"
+#include "Orion/Modules/GPSModules/GPS.hpp"
 
 #include "HardwareSerial.h"
 

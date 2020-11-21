@@ -2,7 +2,7 @@
 #define __ORION_MODULES_DATAMODULES_BME280_H__
 
 #include "Orion.h"
-#include "Modules/Module.hpp"
+#include "Orion/Modules/Module.hpp"
 
 namespace Orion
 {

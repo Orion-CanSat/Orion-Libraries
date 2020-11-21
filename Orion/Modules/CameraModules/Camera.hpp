@@ -2,7 +2,7 @@
 #define __ORION_MODULES_CAMERAMODULE_CAMERA_H__
 
 #include "Orion.h"
-#include "Modules/Module.hpp"
+#include "Orion/Modules/Module.hpp"
 
 #include <stdint.h>
 #include <math.h>

@@ -1,7 +1,7 @@
-#include "Utilities/Memory/Buffer.hpp"
+#include "Orion/Utilities/Memory/Buffer.hpp"
 
 #include <stdio.h>
-#include <string.h>
+#include <inttypes.h>
 
 using namespace Orion::Utilities::Memory;
 
@@ -20,18 +20,18 @@ static char* lltoa(int64_t num)
     return c;
 }
 
-Buffer::Buffer(const char* fname, uint32_t size)
+bool Buffer::Initialize()
 {
     _cache = new uint8_t[_size + 1];
     memset(_cache, 0, _size + 1);
+    return true;
+}
+
+Buffer::Buffer() { }
+Buffer::Buffer(uint32_t size)
+{
     _size = size;
     _used = 0;
-
-    #ifdef ARDUINO
-        fptr = SD.open(fname);
-    #else
-        fptr = fopen(fname, "wb");
-    #endif
 }
 
 void Buffer::operator<<(int8_t vl)
@@ -107,6 +107,7 @@ void Buffer::operator<<(const char* vl)
         uint32_t bytesRead = 0;
         memcpy(_cache + _used, vl, (_size - _used));
         bytesRead = _size - _used;
+        _used = _size;
         Flush();
 
         vl += bytesRead;
@@ -125,15 +126,7 @@ void Buffer::operator<<(const char* vl)
     }
 }
 
-void Buffer::Flush()
-{
-    #ifdef ARDUINO
-        uint32_t size = strlen((const char*)_cache);
-        fptr.write(_cache, size);
-    #else
-        fprintf(fptr, "%s", _cache);
-    #endif
-}
+void Buffer::Flush() { }
 
 void Buffer::Clear()
 {

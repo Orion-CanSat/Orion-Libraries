@@ -2,7 +2,7 @@
 #define __ORION_UTILITIES_MATH_MATRIX_H__
 
 #include "Orion.h"
-#include "Utilities/Math/Vector.hpp"
+#include "Orion/Utilities/Math/Vector.hpp"
 
 #include <stdint.h>
 #include <string.h>

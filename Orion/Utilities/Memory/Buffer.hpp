@@ -5,13 +5,12 @@
 
 #include <stdint.h>
 #ifdef ARDUINO
-    #include <SD.h>
     #include <WString.h>
 #else
     #include <string>
 #endif
 
-#include "Utilities/Memory/unique_ptr.hpp"
+#include "Orion/Utilities/Memory/unique_ptr.hpp"
 
 namespace Orion
 {
@@ -21,18 +20,15 @@ namespace Orion
         {
             class Buffer
             {
-                private:
+                protected:
                     uint8_t* _cache;
                     uint32_t _size;
                     uint32_t _used;
-                    #ifdef ARDUINO
-                        File fptr;
-                    #else
-                        FILE fptr;
-                    #endif
 
+                    bool Initialize();
                 public:
-                    Buffer(const char* fname = "LOG", uint32_t size = 1024);
+                    Buffer();
+                    Buffer(uint32_t size);
 
                     void operator<<(int8_t vl);
                     void operator<<(uint8_t vl);
@@ -49,7 +45,7 @@ namespace Orion
                     #endif
                     void operator<<(const char* vl);
 
-                    void Flush();
+                    virtual void Flush();
                     void Clear();
 
                     ~Buffer();

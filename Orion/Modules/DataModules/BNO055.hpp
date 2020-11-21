@@ -2,7 +2,7 @@
 #define __ORION_MODULES_DATAMODULES_BNO055_H__
 
 #include "Orion.h"
-#include "Modules/Module.hpp"
+#include "Orion/Modules/Module.hpp"
 
 #include <stdint.h>
 
