@@ -2,6 +2,7 @@
 
 #include <string.h>
 
+using namespace Orion::Utilities;
 using namespace Orion::Utilities::Logger;
 
 FileLogger::FileLogger(const char* fname, uint32_t size)
@@ -19,10 +20,9 @@ FileLogger::FileLogger(const char* fname, uint32_t size)
     #endif
 }
 
-void FileLogger::operator<<(const char* vl)
+Memory::Buffer FileLogger::operator<<(const char* vl)
 {
-    String logString = String("[LOG ") + String(millis()) + String("]: ") + String(vl) + String("\n");
-    Memory::Buffer::operator<<(logString);
+    return Memory::Buffer::operator<<("[LOG ").operator<<(millis()).operator<<("]: ").operator<<(vl).operator<<('\n');
 }
 
 void FileLogger::Flush()
@@ -40,7 +40,9 @@ void FileLogger::Flush()
 
 FileLogger::~FileLogger()
 {
-   #ifndef ARDUINO
+    #ifdef ARDUINO
+        _fptr.close();
+    #else
         fclose(_fptr);
     #endif 
 

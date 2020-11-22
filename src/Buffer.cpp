@@ -24,6 +24,7 @@ bool Buffer::Initialize()
 {
     _cache = new uint8_t[_size + 1];
     memset(_cache, 0, _size + 1);
+    _used = 0;
     return true;
 }
 
@@ -31,69 +32,96 @@ Buffer::Buffer() { }
 Buffer::Buffer(uint32_t size)
 {
     _size = size;
-    _used = 0;
 }
 
-void Buffer::operator<<(int8_t vl)
+Buffer Buffer::operator<<(int8_t vl)
 {
     char* temp = lltoa(vl);
-    operator<<(temp);
+    Buffer returnVal = operator<<(temp);
     delete temp;
+
+    return returnVal;
 }
-void Buffer::operator<<(uint8_t vl)
+Buffer Buffer::operator<<(uint8_t vl)
 {
     char* temp = ulltoa(vl);
-    operator<<(temp);
+    Buffer returnVal = operator<<(temp);
     delete temp;
+
+    return returnVal;
 }
-void Buffer::operator<<(int16_t vl)
+Buffer Buffer::operator<<(int16_t vl)
 {
     char* temp = lltoa(vl);
-    operator<<(temp);
+    Buffer returnVal = operator<<(temp);
     delete temp;
+
+    return returnVal;
 }
-void Buffer::operator<<(uint16_t vl)
+Buffer Buffer::operator<<(uint16_t vl)
 {
     char* temp = ulltoa(vl);
-    operator<<(temp);
+    Buffer returnVal = operator<<(temp);
     delete temp;
+
+    return returnVal;
 }
-void Buffer::operator<<(int32_t vl)
+Buffer Buffer::operator<<(int32_t vl)
 {
     char* temp = lltoa(vl);
-    operator<<(temp);
+    Buffer returnVal = operator<<(temp);
     delete temp;
+
+    return returnVal;
 }
-void Buffer::operator<<(uint32_t vl)
+Buffer Buffer::operator<<(uint32_t vl)
 {
     char* temp = ulltoa(vl);
-    operator<<(temp);
+    Buffer returnVal = operator<<(temp);
     delete temp;
+
+    return returnVal;
 }
-void Buffer::operator<<(int64_t vl)
+Buffer Buffer::operator<<(int64_t vl)
 {
     char* temp = lltoa(vl);
-    operator<<(temp);
+    Buffer returnVal = operator<<(temp);
     delete temp;
+
+    return returnVal;
 }
-void Buffer::operator<<(uint64_t vl)
+Buffer Buffer::operator<<(uint64_t vl)
 {
     char* temp = ulltoa(vl);
-    operator<<(temp);
+    Buffer returnVal = operator<<(temp);
     delete temp;
+
+    return returnVal;
+}
+Buffer Buffer::operator<<(char vl)
+{
+    if (_used < _size)
+        _cache[_used++] = vl;
+    else
+    {
+        Flush();
+        _cache[0] = vl;
+        _used = 0;
+    }
+    return *this;
 }
 #ifdef ARDUINO
-    void Buffer::operator<<(String vl)
+    Buffer Buffer::operator<<(String vl)
     {
-        operator<<(vl.c_str());
+        return operator<<(vl.c_str());
     }
 #else
-    void Buffer::operator<<(std::string vl)
+    Buffer Buffer::operator<<(std::string vl)
     {
-        operator<<(vl.c_str());
+        return operator<<(vl.c_str());
     }
 #endif
-void Buffer::operator<<(const char* vl)
+Buffer Buffer::operator<<(const char* vl)
 {
     uint32_t sizeOfVl = strlen(vl);
     if (_used + sizeOfVl <= _size)
@@ -124,6 +152,8 @@ void Buffer::operator<<(const char* vl)
         _used = sizeOfVl % _size;
         _cache[_used] = 0x00;
     }
+
+    return *this;
 }
 
 void Buffer::Flush() { }

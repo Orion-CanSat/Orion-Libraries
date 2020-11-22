@@ -6,16 +6,29 @@
 #ifndef NAN
     #define NAN (float)0xFFFFFFFF
 #endif
-
 #ifndef NULL
     #define NULL (void*)0x00
 #endif
-
 #ifndef PI
     #define PI (float)3.1415926535897932384626433832795
 #endif
-
 #define decPlace float
+
+
+#ifdef _MSC_VER
+    #define INLINE __forceinline
+#elif defined(__GNUC__)
+    #define INLINE inline __attribute__((__always_inline__))
+#elif defined(__CLANG__)
+    #if __has_attribute(__always_inline__)
+        #define INLINE inline __attribute__((__always_inline__))
+    #else
+        #define INLINE inline
+    #endif
+#else
+    #define INLINE inline
+#endif
+
 
 extern "C"
 {

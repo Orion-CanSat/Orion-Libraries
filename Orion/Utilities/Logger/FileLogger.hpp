@@ -3,7 +3,7 @@
 
 #include "Orion.h"
 
-#include "Orion/Utilities/Logger/Logger.hpp"
+#include "Orion/Utilities/Memory/Buffer.hpp"
 
 #ifdef ARDUINO
     #include <SD.h>
@@ -18,7 +18,7 @@ namespace Orion
     {
         namespace Logger
         {
-            class FileLogger : public Logger
+            class FileLogger : public Memory::Buffer
             {
                 private:
                     const char* _fname;
@@ -27,7 +27,7 @@ namespace Orion
                 public:
                     FileLogger(const char* fname, uint32_t size);
 
-                    void operator<<(const char* vl);
+                    Memory::Buffer operator<<(const char* vl);
                     
                     void Flush();
 

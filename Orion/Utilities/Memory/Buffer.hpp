@@ -30,25 +30,26 @@ namespace Orion
                     Buffer();
                     Buffer(uint32_t size);
 
-                    void operator<<(int8_t vl);
-                    void operator<<(uint8_t vl);
-                    void operator<<(int16_t vl);
-                    void operator<<(uint16_t vl);
-                    void operator<<(int32_t vl);
-                    void operator<<(uint32_t vl);
-                    void operator<<(int64_t vl);
-                    void operator<<(uint64_t vl);
+                    Buffer operator<<(int8_t vl);
+                    Buffer operator<<(uint8_t vl);
+                    Buffer operator<<(int16_t vl);
+                    Buffer operator<<(uint16_t vl);
+                    Buffer operator<<(int32_t vl);
+                    Buffer operator<<(uint32_t vl);
+                    Buffer operator<<(int64_t vl);
+                    Buffer operator<<(uint64_t vl);
+                    Buffer operator<<(char vl);
                     #ifdef ARDUINO
-                        void operator<<(String vl);
+                        Buffer operator<<(String vl);
                     #else
-                        void operator<<(std::string vl);
+                        Buffer operator<<(std::string vl);
                     #endif
-                    void operator<<(const char* vl);
+                    Buffer operator<<(const char* vl);
 
                     virtual void Flush();
                     void Clear();
 
-                    ~Buffer();
+                    virtual ~Buffer();
             };
         }
     }
