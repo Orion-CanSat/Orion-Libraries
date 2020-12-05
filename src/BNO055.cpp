@@ -1,3 +1,6 @@
+#include <Arduino.h>
+#include <math.h>
+
 #include "Orion/Modules/DataModules/BNO055.hpp"
 #include "Orion/Utilities/Timeout.hpp"
 

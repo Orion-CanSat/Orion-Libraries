@@ -19,10 +19,11 @@ namespace Orion
                 uint32_t* _counter = nullptr;
 
             public:
+                shared_ptr() { _var = NULL; _counter = new uint32_t(0); *_counter = 1; }
                 shared_ptr(T* ptr) { _var = ptr; _counter = new uint32_t(0); *_counter = 1; }
                 shared_ptr(const T* ptr) { _var = ptr; _counter = new uint32_t(0); *_counter = 1; }
-                shared_ptr(const shared_ptr&& ptr) { _var = ptr._var; _counter = ptr._counter; (*_counter)++; }
-                shared_ptr(const shared_ptr& ptr) { _var = ptr._var; _counter = ptr._counter; (*_counter)++; }
+                shared_ptr(const shared_ptr<T>&& ptr) { _var = ptr._var; _counter = ptr._counter; (*_counter)++; }
+                shared_ptr(const shared_ptr<T>& ptr) { _var = ptr._var; _counter = ptr._counter; (*_counter)++; }
 
                 T* get() { return _var; }
                 T* release() { return get(); }
