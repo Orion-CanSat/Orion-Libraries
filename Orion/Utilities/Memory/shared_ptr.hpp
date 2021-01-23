@@ -19,11 +19,11 @@ namespace Orion
                 uint32_t* _counter = nullptr;
 
             public:
-                shared_ptr() { _var = NULL; _counter = new uint32_t(0); *_counter = 1; }
+                shared_ptr() { _var = (T*)NULL; _counter = new uint32_t(0); *_counter = 1; }
                 shared_ptr(T* ptr) { _var = ptr; _counter = new uint32_t(0); *_counter = 1; }
                 shared_ptr(const T* ptr) { _var = ptr; _counter = new uint32_t(0); *_counter = 1; }
-                shared_ptr(const shared_ptr<T>&& ptr) { _var = ptr._var; _counter = ptr._counter; (*_counter)++; }
-                shared_ptr(const shared_ptr<T>& ptr) { _var = ptr._var; _counter = ptr._counter; (*_counter)++; }
+                shared_ptr(shared_ptr<T>&& ptr) { _var = ptr._var; _counter = ptr._counter; (*_counter)++; }
+                shared_ptr(shared_ptr<T>& ptr) { _var = ptr._var; _counter = ptr._counter; (*_counter)++; }
 
                 T* get() { return _var; }
                 T* release() { return get(); }
@@ -38,6 +38,8 @@ namespace Orion
                 T& operator*() { return *_var; }
                 T& operator->() { return *_var; }
                 bool operator==(const shared_ptr<T>& ptr) { return _var == ptr._var; }
+                bool operator=(shared_ptr<T> ptr) const { _var = ptr._var; _counter = ptr._counter; return true; }
+                bool operator=(shared_ptr<T>& ptr) { _var = ptr._var; _counter = ptr._counter; return true; }
 
                 ~shared_ptr()
                 {

@@ -40,6 +40,8 @@ namespace Orion
                 uint32_t GetLastUpdateTime();
                 virtual bool Transmit(uint8_t* message, uint32_t len);
                 virtual bool Receive(uint8_t* message, uint32_t* len);
+                
+                bool IsInitialized();
 
                 virtual void Sleep();
                 virtual void WakeUp();

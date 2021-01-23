@@ -3,6 +3,7 @@
 
 #include "Orion.h"
 
+#include <Arduino.h>
 #include <stdint.h>
 
 namespace Orion
@@ -130,7 +131,7 @@ namespace Orion
                             return;
                         delete _list;
                         _initialized = false;
-                        _size = _used = NAN;
+                        _size = _used = 0;
                     }
             };
         }

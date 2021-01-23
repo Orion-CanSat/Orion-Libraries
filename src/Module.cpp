@@ -38,6 +38,11 @@ bool Module::Receive(uint8_t* message, uint32_t* len)
     return false;
 }
 
+bool Module::IsInitialized()
+{
+    return this->_initialized;
+}
+
 void Module::Sleep() { }
 void Module::WakeUp() { }
 
