@@ -5,4 +5,4 @@
 #include <Orion/Orion.hpp>
 #include <Orion/Data/Data.hpp>
 
-GENERATE_DATA(Temperature, __TEMPERATURE__)
+GENERATE_DATA(LinearDisplacement, __LINEAR_DISPLACEMENT__)

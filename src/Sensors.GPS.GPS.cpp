@@ -2,12 +2,12 @@
     #include <Arduino.h>
 #endif
 
-#include "Orion/Orion.h"
+#include "Orion/Orion.hpp"
 #include "Orion/Sensors/Sensor.hpp"
 #include "Orion/Sensors/GPS/GPS.hpp"
 
 static uint64_t DataTypes[] = {
-    __LONGTITUDE__,
+    __LONGITUDE__,
     __LATITUDE__,
     __LINEAR_DISPLACEMENT__
 };
@@ -29,7 +29,7 @@ Orion::Sensors::GPS::GPS::GPS() {
 
 
 float Orion::Sensors::GPS::GPS::GetDataType(uint64_t dataType) {
-    if (dataType == __LONGTITUDE__)
+    if (dataType == __LONGITUDE__)
         return this->_coordinates._longitude;
     else if (dataType == __LATITUDE__)
         return this->_coordinates._latitude;

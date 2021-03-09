@@ -1,7 +1,7 @@
 #ifndef __ORION_UTILITIES_TIMEOUT_H__
 #define __ORION_UTILITIES_TIMEOUT_H__
 
-#include "Orion.h"
+#include "Orion/Orion.hpp"
 
 #include <stdint.h>
 

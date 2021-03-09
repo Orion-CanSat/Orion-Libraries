@@ -1,7 +1,7 @@
 #ifndef __ORION_UTILITIES_MATH_MATRIX_H__
 #define __ORION_UTILITIES_MATH_MATRIX_H__
 
-#include "Orion.h"
+#include "Orion/Orion.hpp"
 #include "Orion/Utilities/Math/Vector.hpp"
 
 #include <stdint.h>

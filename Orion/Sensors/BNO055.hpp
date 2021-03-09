@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Orion/Orion.h"
+#include "Orion/Orion.hpp"
 #include "Orion/Sensors/Sensor.hpp"
 
 namespace Orion {

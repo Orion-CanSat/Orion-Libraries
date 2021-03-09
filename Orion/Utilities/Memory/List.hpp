@@ -1,7 +1,7 @@
 #ifndef __ORION_UTILITIES_MEMORY_LIST_H__
 #define __ORION_UTILITIES_MEMORY_LIST_H__
 
-#include "Orion.h"
+#include "Orion/Orion.hpp"
 
 #include <Arduino.h>
 #include <stdint.h>

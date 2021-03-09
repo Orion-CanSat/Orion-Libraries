@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Orion/Orion.h"
+#include "Orion/Orion.hpp"
 
 namespace Orion {
     namespace Sensors {
@@ -9,7 +9,7 @@ namespace Orion {
                 bool _initialized = false;
                 uint8_t _state = 0x00;
                 uint64_t _type = 0x00;
-                uint32_t _lastUpdateTime = 0;
+                unsigned long _lastUpdateTime = 0;
 
                 virtual uint64_t* GetDataTypes();
                 virtual uint64_t GetDataTypesSize();

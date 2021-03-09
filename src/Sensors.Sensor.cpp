@@ -2,7 +2,7 @@
     #include <Arduino.h>
 #endif
 
-#include "Orion.h"
+#include "Orion/Orion.hpp"
 #include "Orion/Sensors/Sensor.hpp"
 
 

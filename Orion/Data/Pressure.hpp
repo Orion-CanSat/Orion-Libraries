@@ -1,13 +1,8 @@
-#ifndef __ORION_DATA_PRESSUREMODULE_H__
-#define __ORION_DATA_PRESSUREMODULE_H__
-
-
-#include "Orion.h"
-#include "Orion/Data/DataModule.hpp"
+#pragma once
 
 #include <stdint.h>
 
+#include <Orion/Orion.hpp>
+#include <Orion/Data/Data.hpp>
+
 GENERATE_DATA(Pressure, __PRESSURE__)
-
-
-#endif//__ORION_DATA_PRESSUREMODULE_H__

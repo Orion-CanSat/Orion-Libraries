@@ -2,7 +2,7 @@
     #include <Arduino.h>
 #endif
 
-#include "Orion/Orion.h"
+#include "Orion/Orion.hpp"
 #include "Orion/Sensors/BNO055.hpp"
 #include "Orion/Sensors/Sensor.hpp"
 
@@ -10,7 +10,7 @@
 #include <utility/imumaths.h>
 
 static uint64_t DataTypes[] = {
-    __ROTATION_ANGLE__,
+    __ROTATIONAL_ANGLE__,
     __ANGULAR_VELOCITY__,
     __LINEAR_ACCELERATION__,
     __LINEAR_VELOCITY__,
@@ -56,11 +56,11 @@ Orion::Sensors::BNO055::BNO055(uint64_t communicationProtocol, int16_t specialPi
 
 
 float Orion::Sensors::BNO055::GetDataType(uint64_t dataType) {
-    if (dataType == (__ROTATION_ANGLE__ | __X_AXIS__))
+    if (dataType == (__ROTATIONAL_ANGLE__ | __X_AXIS__))
         return this->_rotationAngle[0];
-    else if (dataType == (__ROTATION_ANGLE__ | __Y_AXIS__))
+    else if (dataType == (__ROTATIONAL_ANGLE__ | __Y_AXIS__))
         return this->_rotationAngle[1];
-    else if (dataType == (__ROTATION_ANGLE__ | __Z_AXIS__))
+    else if (dataType == (__ROTATIONAL_ANGLE__ | __Z_AXIS__))
         return this->_rotationAngle[2];
     
     else if (dataType == (__ANGULAR_VELOCITY__ | __X_AXIS__))

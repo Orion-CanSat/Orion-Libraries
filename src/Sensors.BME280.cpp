@@ -2,7 +2,7 @@
     #include <Arduino.h>
 #endif
 
-#include "Orion/Orion.h"
+#include "Orion/Orion.hpp"
 #include "Orion/Sensors/BME280.hpp"
 #include "Orion/Sensors/Sensor.hpp"
 
@@ -75,7 +75,7 @@ float Orion::Sensors::BME280::GetDataType(uint64_t dataType) {
     else if (dataType == __HUMIDITY__)
         return this->_humididty;
     else if (dataType == __ALTITUDE__)
-        return this->_temperature;
+        return this->_altitude;
     else
         return NAN;
 }

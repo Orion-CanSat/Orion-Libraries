@@ -4,7 +4,7 @@
 
 
 static _Bool _canPanic = 0;
-void(*_panicFunctionCallback)(void) = NULL;
+void(*_panicFunctionCallback)(void) = (void(*)())NULL;
 
 
 extern "C"
