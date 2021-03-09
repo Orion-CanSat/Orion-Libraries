@@ -6,7 +6,6 @@
 #include "Orion/Utilities/Memory/weak_ptr.hpp"
 
 #include <stdint.h>
-#include <stdlib.h>
 
 namespace Orion
 {
