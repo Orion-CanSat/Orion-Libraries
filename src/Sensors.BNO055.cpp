@@ -50,8 +50,6 @@ Orion::Sensors::BNO055::BNO055(uint64_t communicationProtocol, int16_t specialPi
     }
     if (communicationProtocol == __SPI__ || specialPin >= 0)
         this->_specialPin = specialPin;
-
-    this->_state = __WAKE__;
 }
 
 

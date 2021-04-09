@@ -62,8 +62,6 @@ Orion::Sensors::BME280::BME280(uint64_t communicationProtocol, int16_t specialPi
         this->_MISO = MISO;
         this->_SCK = SCK;
     }
-
-    this->_state = __WAKE__;
 }
 
 

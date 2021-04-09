@@ -28,7 +28,6 @@ Orion::Sensors::TeensyChipTemperature::TeensyChipTemperature(uint8_t analogResol
 
     this->_analogResolution = analogResolution;
     this->_initialized = true;
-    this->_state = __WAKE__;
 }
 
 

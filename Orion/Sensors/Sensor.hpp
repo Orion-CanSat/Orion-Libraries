@@ -7,9 +7,9 @@ namespace Orion {
         class Sensor {
             protected:
                 bool _initialized = false;
-                uint8_t _state = 0x00;
+                uint8_t _state = __WAKE__;
                 uint64_t _type = 0x00;
-                unsigned long _lastUpdateTime = 0;
+                uint32_t _lastUpdateTime = 0;
 
                 virtual uint64_t* GetDataTypes();
                 virtual uint64_t GetDataTypesSize();
