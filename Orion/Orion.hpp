@@ -11,6 +11,9 @@
 #ifndef PI
     #define PI (float)3.1415926535897932384626433832795
 #endif
+#ifndef NULL
+    #define NULL (void*)0x00
+#endif
 
 
 #ifndef INLINE
