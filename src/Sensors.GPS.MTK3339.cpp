@@ -7,6 +7,7 @@
     #include "Orion/Sensors/GPS/Coordinates.hpp"
     #include "Orion/Sensors/GPS/GPS.hpp"
     #include "Orion/Sensors/GPS/MTK3339.hpp"
+    #include "Orion/Utilities/Time/Delay.hpp"
 
     #include <Adafruit_GPS.h>
 
@@ -138,7 +139,7 @@
         ((Adafruit_GPS*)(this->_adafruitSensor))->sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
         this->SetReadFrequency(1000);
         ((Adafruit_GPS*)(this->_adafruitSensor))->sendCommand(PGCMD_ANTENNA);
-        delay(100);
+        Orion::Utilities::Time::Delay::DelayMS(100);
 
         if (this->_hardwareSerial)
             this->_hardwareSerial->println(PMTK_Q_RELEASE);
